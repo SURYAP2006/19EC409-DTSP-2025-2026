@@ -80,3 +80,5 @@ title("Phase Spectrum");
 
 
 # RESULT: 
+
+The DFT of the given sequence was successfully computed using both direct computation method and FFT algorithm in SCILAB. 
