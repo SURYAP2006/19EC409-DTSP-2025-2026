@@ -8,24 +8,18 @@
 PC installed with SCILAB. 
 
 # PROGRAM: 
-// DISCRETE FOURIER TRANSFORM 
 ```
 clc;
 clear;
 
-// Step 1: Take N and x(n) as input
-N = input("Enter the length of the signal N: ");
-x = zeros(1, N);
+// Use a test signal if input is causing issues
+N = 8;
+x = [1, 1, 1, 1, 1, 1, 1, 1];  // Rectangular pulse
 
-disp("Enter the signal values:");
-for i = 1:N
-    x(i) = input("x(" + string(i-1) + ") = ");
-end
+disp("Using test signal: x = " + string(x));
 
-// Step 2: Initialize DFT array
+// Compute DFT
 X = zeros(1, N);
-
-// Step 3: Compute DFT
 for k = 0:N-1
     sum_val = 0;
     for n = 0:N-1
@@ -34,49 +28,48 @@ for k = 0:N-1
     X(k+1) = sum_val;
 end
 
-// Step 4: Display in desired { a ± jb } format
-str_out = "{";
-for k = 1:N
-    real_part = round(real(X(k))*1000)/1000; // rounding to 3 decimals
-    imag_part = round(imag(X(k))*1000)/1000;
-    
-    if imag_part >= 0 then
-        str_out = str_out + string(real_part) + " + j" + string(imag_part);
-    else
-        str_out = str_out + string(real_part) + " - j" + string(abs(imag_part));
-    end
-    
-    if k < N then
-        str_out = str_out + ", ";
-    else
-        str_out = str_out + "}";
-    end
+// Display results
+disp("DFT Results:");
+for k = 0:N-1
+    printf("X(%d) = %.3f + j%.3f\n", k, real(X(k+1)), imag(X(k+1)));
 end
 
-disp("X(k) = " + str_out);
+// Create a new figure window
+f = scf(0);
+f.figure_name = "DFT Analysis";
+clf(0);
 
-// Step 5: Plot magnitude and phase
-freq_index = 0:N-1;
+// Plot input signal
+subplot(3,1,1);
+plot2d3(0:N-1, x, style=2);  // Blue stems
+xlabel("Time index (n)");
+ylabel("Amplitude");
+title("Input Signal x[n]");
 
-subplot(2,1,1);
-plot(freq_index, abs(X), 'o-');
+// Plot magnitude spectrum
+subplot(3,1,2);
+plot2d3(0:N-1, abs(X), style=5);  // Red stems
 xlabel("Frequency index (k)");
 ylabel("|X(k)|");
 title("Magnitude Spectrum");
 
-
-subplot(2,1,2);
-plot(freq_index, atan(imag(X), real(X)), 'o-'); // phase = atan2(imag, real)
+// Plot phase spectrum
+subplot(3,1,3);
+plot2d3(0:N-1, atan(imag(X), real(X)), style=3);  // Green stems
 xlabel("Frequency index (k)");
 ylabel("Phase (radians)");
 title("Phase Spectrum");
+
+// Ensure window is visible
+show_window(0);
 
 
 ```
 
 # OUTPUT: 
 
-<img width="1920" height="1080" alt="Screenshot 2025-09-08 150939" src="https://github.com/user-attachments/assets/9c4aab02-e7d0-4aaa-920d-bc45f8fb0433" />
+<img width="1920" height="1080" alt="Screenshot 2025-09-08 160652" src="https://github.com/user-attachments/assets/43f1900d-19cc-4be5-bba1-6d0662f2879d" />
+
 
 
 # RESULT: 
