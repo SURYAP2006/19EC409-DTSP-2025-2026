@@ -15,8 +15,8 @@ clc;
 clear;
 
 // Input sequences
-x = [1 2 3 4];
-h = [1 2 3 4];
+x = [1 1 1 1];
+h = [1 2 3 1];
 
 m = length(x);
 n = length(h);
@@ -37,13 +37,13 @@ ylabel('Amplitude');
 title('Graphical Representation of Impulse Signal h');
 
 // Linear convolution using direct formula
-y = zeros(1, m1);
+y = zeros(1, m+n-1);
 
-for i = 1:m1
+for i = 1:m+n-1
     conv_sum = 0;
     for j = 1:i
-        if ((i-j <= n) & (j <= m)) then
-            conv_sum = conv_sum  x(j) * h(i-j);
+        if ((i-j+1 <= n) & (j <= m)) then
+            conv_sum = conv_sum + x(j) * h(i-j+1);
         end
     end
     y(i) = conv_sum;
@@ -56,7 +56,8 @@ subplot(3,1,3);
 plot2d(0:1:length(y)-1, y);
 xlabel('Time');
 ylabel('Amplitude');
-title('Graphical Representation of Output Signal y');
+title('Graphical Representation of Output Signal linear convolution y');
+
 
 ```
 
@@ -141,6 +142,7 @@ title("Circular Convolution y(n)");
 
 ## OUTPUT (Linear Convolution): 
 
+<img width="1920" height="1080" alt="Screenshot 2025-09-08 153439" src="https://github.com/user-attachments/assets/9ff38315-965b-4473-a62d-82a85f0dace0" />
 
 
 ## OUTPUT (Circular Convolution): 
@@ -149,3 +151,5 @@ title("Circular Convolution y(n)");
 
 
 ## RESULT: 
+
+The linear and circular convolution of the given sequences were successfully computed using SCILAB.
