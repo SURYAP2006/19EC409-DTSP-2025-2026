@@ -10,10 +10,16 @@ PC installed with SCILAB.
 ## PROGRAM (Linear Convolution): 
 
 // Linear Convolution
+```
+
+```
 
 ## PROGRAM (Circular Convolution): 
 
 // Circular Convolution
+```
+
+```
 
 ## OUTPUT (Linear Convolution): 
 
