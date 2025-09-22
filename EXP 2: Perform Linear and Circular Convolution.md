@@ -11,52 +11,38 @@ PC installed with SCILAB.
 
 // Linear Convolution
 ```
-clc;
-clear;
+// Linear Convolution in Scilab
 
 // Input sequences
-x = [1 1 1 1];
-h = [1 2 3 1];
+x = [1 2 3 4];     // Example input signal
+h = [1 1 1];       // Example impulse response
 
-m = length(x);
-n = length(h);
-a = 0:1:m-1;
-b = 0:1:n-1;
+// Perform linear convolution
+y = conv(x, h);
 
-// Plot input signals
+// Display results
+disp("Input sequence x(n) = " + string(x));
+disp("Impulse response h(n) = " + string(h));
+disp("Linear Convolution y(n) = " + string(y));
+
+// --- Plot signals ---
+// Plot x(n)
 subplot(3,1,1);
-plot2d(a, x);
-xlabel('Time');
-ylabel('Amplitude');
-title('Graphical Representation of Input Signal X');
+n1 = 0:length(x)-1;
+plot2d3(n1, x);  
+xtitle("Input Sequence x(n)");
 
+// Plot h(n)
 subplot(3,1,2);
-plot2d(b, h);
-xlabel('Time');
-ylabel('Amplitude');
-title('Graphical Representation of Impulse Signal h');
+n2 = 0:length(h)-1;
+plot2d3(n2, h);
+xtitle("Impulse Response h(n)");
 
-// Linear convolution using direct formula
-y = zeros(1, m+n-1);
-
-for i = 1:m+n-1
-    conv_sum = 0;
-    for j = 1:i
-        if ((i-j+1 <= n) & (j <= m)) then
-            conv_sum = conv_sum + x(j) * h(i-j+1);
-        end
-    end
-    y(i) = conv_sum;
-end
-
-disp(y, 'Convolution Sum using Direct Formula Method = ');
-
-// Plot output signal
+// Plot y(n)
 subplot(3,1,3);
-plot2d(0:1:length(y)-1, y);
-xlabel('Time');
-ylabel('Amplitude');
-title('Graphical Representation of Output Signal linear convolution y');
+n3 = 0:length(y)-1;
+plot2d3(n3, y);
+xtitle("Linear Convolution y(n)");
 
 
 ```
@@ -142,7 +128,8 @@ title("Circular Convolution y(n)");
 
 ## OUTPUT (Linear Convolution): 
 
-<img width="1920" height="1080" alt="Screenshot 2025-09-08 153439" src="https://github.com/user-attachments/assets/9ff38315-965b-4473-a62d-82a85f0dace0" />
+<img width="1920" height="1080" alt="Screenshot 2025-09-22 101836" src="https://github.com/user-attachments/assets/002a059e-b5e1-42a7-8cc6-6f68c0f43d5c" />
+
 
 
 ## OUTPUT (Circular Convolution): 
